@@ -1,0 +1,7 @@
+/.idea/
+*.xml
+/pyTest/foo/*/*.pkl
+/pyTest/foo/*/*.gif
+/pyTest/foo/*/*.mp3
+/pyTest/foo/*/*.wav
+/pyTest/foo/*/*.exe
