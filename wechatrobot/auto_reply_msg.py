@@ -86,9 +86,9 @@ def group_chat(group_msg):
     chat_lists = itchat.search_chatrooms(name = chatroom_name)
 
     #常聊的群
-    chatroom_ids = ['♪红浪漫歌舞厅ღ','ღ皇朝洗浴SPA会所ღ']
+    chatroom_ids = ['ღ皇朝洗浴SPA会所ღ']
     #自己的群聊昵称
-    self_nick_name = ['java三年-海淀-准备换坑','本群最帅的男人','一号技师']
+    self_nick_name = ['本群最帅的男人']
 
     if group_msg['MsgType'] == 1:
         print('['+chatroom_name+'(群)]->'+username+":"+group_msg['Content'])
