@@ -1,21 +1,24 @@
-##机器人自动回复消息
+'''
+机器人自动回复消息
+'''
 import itchat
 from itchat.content import *
 import time
 import os
-import mp3_2_wav
-import sizhi_robot
+from wechatrobot.audio import mp3_2_wav
+from wechatrobot.robot import sizhi_robot
 
 
-##个人聊天
-#文本信息
+#个人聊天文本信息
 @itchat.msg_register([itchat.content.TEXT,itchat.content.RECORDING],isFriendChat=True)
 def private_text_chat(private_msg):
+
+    #文件传输助手
     if private_msg['ToUserName'] == 'filehelper' :
-        #获取好友昵称
         nick_name = '自己'
         from_user_name = 'filehelper'
     else:
+        #好友昵称
         nick_name = private_msg['User']['NickName']
         from_user_name = private_msg['FromUserName']
 
@@ -33,16 +36,16 @@ def private_text_chat(private_msg):
             content = mp3_2_wav.voice2Text(fileName)
             print('Google翻译：'+content)
 
-        #删除语音文件
+        #删除转化后的语音文件
         if os.path.exists(os.getcwd()+'\\'+fileName):
-            #删除文件，可使用以下两种方法。
             os.remove(os.getcwd()+'\\'+fileName)
         msg = content
 
     else:
-        #获取好友消息
+        #获取消息内容
         msg = private_msg['Text']
         print(nick_name +":"+msg)
+
     #请求机器人
     replymsg = sizhi_robot.sizhi_msg(msg)
     #返回消息
@@ -52,7 +55,6 @@ def private_text_chat(private_msg):
 @itchat.msg_register([itchat.content.PICTURE,itchat.content.ATTACHMENT,itchat.content.VIDEO],isFriendChat=True)
 def private_other_chat(other_msg):
     if other_msg['ToUserName'] == 'filehelper' :
-        #获取好友昵称
         from_user_name = 'filehelper'
         nick_name = '自己'
     else:
@@ -65,9 +67,9 @@ def private_other_chat(other_msg):
     if other_msg_type in save_type :
         # other_msg['Text'](other_msg['FileName'])
         itchat.send_image('defult.jpg',from_user_name)
-    elif other_msg_type == 49:
-        #红包消息给微信助手发提示信息
-        itchat.send(nick_name+'给你发红包了！！！', toUserName=from_user_name)
+    # elif other_msg_type == 49:
+    #     #红包消息给微信助手发提示信息
+    #     itchat.send(nick_name+'给你发红包了！！！', toUserName=from_user_name)
     else:
         #默认回复
         itchat.send_image('defult.jpg',from_user_name)
@@ -115,17 +117,3 @@ def group_chat(group_msg):
 #微信热启动
 itchat.auto_login(hotReload=True)
 itchat.run()
-
-
-
-
-
-# def main():
-#     reply = SiZhiRobot.sizhi_msg("你好啊")
-#     print(reply)
-#     # os.remove(os.getcwd()+'\\190724-163946.mp3')
-#
-#     #如果该py文件作为脚本来执行时，会执行'__mian__'方法，如果作为第三方model被引用，则不会执行
-# if __name__ == '__main__':
-#     main()
-

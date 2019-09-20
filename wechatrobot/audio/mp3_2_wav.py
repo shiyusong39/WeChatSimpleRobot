@@ -28,12 +28,12 @@ def dealMp3(filePath,fileName):
     #导出wav文件
     sound_wav.export(fileName,format='wav')
 
-    isDeal = os.path.exists(os.getcwd()+'\\'+fileName)
-
-    #如果wav文件生成了就删除mp3文件
-    if isDeal:
-        #删除mp3文件
-        os.remove(filePath)
+    # isDeal = os.path.exists(os.getcwd()+'\\'+fileName)
+    #
+    # #如果wav文件生成了就删除mp3文件
+    # if isDeal:
+    #     #删除mp3文件
+    #     os.remove(filePath)
 
     return isDeal
 
@@ -54,17 +54,3 @@ def voice2Text(file_name):
         print("Google Speech Recognition error; {0}".format(e))
 
     return content or '无法翻译'
-
-
-
-# def main():
-#     voice_file = '190726-142241.mp3'
-#     # filePath = os.getcwd()+'\\'+voice_file
-#     fileName = voice_file.replace('mp3','wav')
-#     # reply = dealMp3(filePath,fileName)
-#     #音频文件
-#     voice2Text(fileName)
-#
-#     #如果该py文件作为脚本来执行时，会执行'__mian__'方法，如果作为第三方model被引用，则不会执行
-# if __name__ == '__main__':
-#     main()
