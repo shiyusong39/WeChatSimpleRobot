@@ -45,6 +45,7 @@ def creat_word(content,wordPath):
         doc.add_paragraph(
             remove_control_characters(line), style=None
         )
+
         # paragraph = doc.paragraphs()
         # paragraph.add_run(remove_control_characters(line))
     doc.save(wordPath)
